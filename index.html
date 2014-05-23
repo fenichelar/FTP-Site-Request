@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+		<title>FTP Site Request Form</title>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="handlebars-0.9.0.pre.5.js"></script>
+		<script type="text/javascript" src="validate.js"></script>
+	</head>
+	<body>
+		<h1>
+			FTP Site Request Form
+		</h1>
+
+		<p id="javascriptDisabled">
+			<b>
+				Javascript must be enabled to use this form.
+			</b>
+		</p>
+
+		<p id="dateNotSupported">
+			<b>
+				The browser you are using is not supported. We recommend you try the newest version of Chrome.
+			</b>
+		</p>
+
+		<p id="instructions" style="display:none">
+			<b>
+				User accounts and files are deleted on the expiration date! Do NOT store original files on this server.
+			</b>
+			Contact <a href="mailto:ithelpdesk@mckenneys.com">ithelpdesk@mckenneys.com</a> for assistance.
+		</p>
+		
+		<form id="form1" name="form1" method="POST" action="submit.php" width="600px" onsubmit="return validateForm(this)" style="display:none">
+
+			<div class="mckLabel">Username:</div>
+			<div class="mckControl">
+				<input id="username" minlength="4" maxlength="20" name="username" size="20" type="text" title="Username" required/>
+			</div>
+
+			<div class="mckLabel">Password:</div>
+			<div class="mckControl">
+				<input id="password" name="password" size="20" type="password" title="Password" required/> Must be at least 8 characters long; contain a number, lowercase letter, and uppercase letter.
+			</div>
+
+			<div class="mckLabel">Confirm Password:</div>
+			<div class="mckControl">
+				<input id="confirmPassword" name="confirmPassword" size="20" type="password" title="Confrim Password" required/>
+			</div>
+
+			<div class="mckLabel">Date of Expiration:</div>
+			<div class="mckControl">
+				<input id="expiration" name="expiration" type="date" title="Date of Expiration" required/> Must be within 90 days of today.
+			</div>
+
+			<div class="mckLabel">Accept Policy:</div>
+			<div class="mckControl">
+				<b>
+					I understand that files and accounts will be removed on the experation date.
+				</b>
+				<input id="policy" name="policy" type="checkbox" title="Accept Policy" required/>
+			</div>
+			
+			<div class="mckLabel"></div>
+			<div class="mckControl">
+				<input id="submitButton" type="submit" name="submit" disabled>
+			</div>
+			
+		</form>
+
+	</body>
+</html>
