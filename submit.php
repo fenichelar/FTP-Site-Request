@@ -5,9 +5,9 @@ $date = "";
 $expiration = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$username = validateText($_POST["username"]);
-	$password = validateText($_POST["password"]);
-	$date = validateText($_POST["expiration"]);
+	$username = sanitizeText($_POST["username"]);
+	$password = sanitizeText($_POST["password"]);
+	$date = sanitizeText($_POST["expiration"]);
 } else {
 	exit(header("Location: http://mckatlftp2012/"));
 }
@@ -46,7 +46,7 @@ $headers = "From: ".$mail_from."\r\n";
 
 $mail_status = mail($mail_to, $subject, $body, $headers);
 
-function validateText($data) {
+function sanitizeText($data) {
 	$data = trim($data);
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
