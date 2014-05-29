@@ -2,16 +2,13 @@
 	<head>
 		<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
 		<title>FTP Site Request Form</title>
-		<link rel="stylesheet" href="style.css" type="text/css">
-		<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="handlebars-0.9.0.pre.5.js"></script>
-		<script type="text/javascript" src="validate.js"></script>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/handlebars-0.9.0.pre.5.js"></script>
+		<script type="text/javascript" src="js/validate.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="icon" type="image/ico" href="image\icon.ico"/>
 	</head>
 	<body>
-		<h1>
-			FTP Site Request Form
-		</h1>
-
 		<p id="javascriptDisabled">
 			<b>
 				Javascript must be enabled to use this form.
@@ -23,15 +20,17 @@
 				The browser you are using is not supported. We recommend you try the newest version of Chrome.
 			</b>
 		</p>
-
-		<p id="instructions" style="display:none">
-			<b>
-				User accounts and files are deleted on the expiration date! Do NOT store original files on this server.
-			</b>
-			Contact <a href="mailto:ithelpdesk@mckenneys.com">ithelpdesk@mckenneys.com</a> for assistance.
-		</p>
 		
-		<form id="form1" name="form1" method="POST" action="submit.php" width="600px" onsubmit="return validateForm(this)" style="display:none">
+		<form id="form1" name="form1" method="POST" action="php/submit.php" width="600px" onsubmit="return validateForm(this)" style="display:none">
+
+			<div>
+				<img src="image\logo.jpg" alt="Mckenneys logo" style="width: 100%;max-height: 100%">
+			</div>
+
+			<div>
+				<b>User accounts and files are deleted on the expiration date! Do NOT store original files on this server.</b>
+				Contact <a href="mailto:ithelpdesk@mckenneys.com">ithelpdesk@mckenneys.com</a> for assistance.
+			</div>
 
 			<div class="mckLabel">Username:</div>
 			<div class="mckControl">

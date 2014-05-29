@@ -4,7 +4,6 @@ $(document).ready( function() {
 	$('#javascriptDisabled').hide();
 	if (checkInput("date")) {
 		$('#dateNotSupported').hide();
-		$('#instructions').show();
 		$('#form1').show();
 		$('#submitButton').removeAttr("disabled");
 		document.getElementById('expiration').valueAsDate = futureDate;
