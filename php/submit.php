@@ -3,11 +3,13 @@ $username = "";
 $password = "";
 $date = "";
 $expiration = "";
+$mail_to = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$username = sanitizeText($_POST["username"]);
 	$password = sanitizeText($_POST["password"]);
 	$date = sanitizeText($_POST["expiration"]);
+	$mail_to = sanitizeText($_POST["email"]);
 } else {
 	exit(header("Location: http://mckatlftp2012/"));
 }
@@ -22,6 +24,7 @@ if($output!="The command completed successfully.\n\n") {
 	
 	$subject = "FTP Request Failure";
 	$body = "An FTP site failed to be created.\r\n";
+	$body .= "The username you have selected is most likely already taken, please try another. If the problem persists, contact ithelpdesk@mckenneys.com for assistance.\r\n";
 	$body .= "Username: $username\r\n";
 	$body .= "Password: $password\r\n";
 	$body .= "Expiration: $expiration\r\n";
@@ -34,15 +37,16 @@ if($output!="The command completed successfully.\n\n") {
 	
 	$subject = "FTP Request Success";
 	$body = "An FTP site was successfully created.\r\n";
+	$body .= "Navigate to ftp://acsftp.mckenneys.com/ to confirm the username and password are working correctly.\r\n";
+	$body .= "Upload files by navigating to P:/".$username."/.\r\n";
 	$body .= "Username: $username\r\n";
 	$body .= "Password: $password\r\n";
 	$body .= "Expiration: $expiration\r\n";
 }
 
-$mail_to = "ithelpdesk@mckenneys.com";
 $mail_from = "ithelpdesk@mckenneys.com";
-
 $headers = "From: ".$mail_from."\r\n";
+$headers .= "Cc: ithelpdesk@mckenneys.com\r\n";
 
 $mail_status = mail($mail_to, $subject, $body, $headers);
 
