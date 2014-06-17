@@ -1,18 +1,18 @@
 <?php
 $username = "";
-$password = "";
 $date = "";
 $expiration = "";
 $mail_to = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$username = sanitizeText($_POST["username"]);
-	$password = sanitizeText($_POST["password"]);
 	$date = sanitizeText($_POST["expiration"]);
 	$mail_to = sanitizeText($_POST["email"]);
 } else {
 	exit(header("Location: http://mckatlftp2012/"));
 }
+
+$password = generatePassword(12);
 
 list($year, $month, $day) = split('[-]', $date);
 $expiration = $month."-".$day."-".$year; 
@@ -29,11 +29,7 @@ if($output!="The command completed successfully.\n\n") {
 	$body .= "Password: $password\r\n";
 	$body .= "Expiration: $expiration\r\n";
 } else {
-	echo "<pre>Username: $username</pre>";
-	echo "<pre>Password: $password</pre>";
-	echo "<pre>Expiration: $expiration</pre>";
-	echo "<pre>Navigate to <a href='ftp://acsftp.mckenneys.com/' target='_blank'>ftp://acsftp.mckenneys.com/</a> to confirm the username and password are working correctly.</pre>";
-	echo "<pre>Upload files by navigating to <a href='P:/".$username."/'>P:/".$username."/</a>.</pre>";
+	echo "<pre>Success: Instructions have been sent to your email.</pre>";
 	
 	$subject = "FTP Request Success";
 	$body = "An FTP site was successfully created.\r\n";
@@ -55,6 +51,18 @@ function sanitizeText($data) {
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
 	return $data;
+}
+
+function generatePassword($len) {
+	$characters='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$password_characters = str_split($characters);
+	$password='';
+
+	for($i=0;$i<$len;$i++) {
+		$password.=$password_characters[rand(0,count($password_characters)-1)];
+	}
+
+	return $password;
 }
 
 ?>
