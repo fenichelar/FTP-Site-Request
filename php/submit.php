@@ -16,7 +16,7 @@ $password = generatePassword(12);
 
 list($year, $month, $day) = split('[-]', $date);
 $expiration = $month."-".$day."-".$year; 
-$command = "cmd.exe /c C:\inetpub\wwwroot\adminSetupFTP.lnk ".$username." ".$password." ".$expiration;
+$command = "cmd.exe /c C:\inetpub\wwwroot\adminSetupFTP.lnk ".$username." ".$password." ".$expiration." ".$mail_to;
 $output = shell_exec($command);
 
 if($output!="The command completed successfully.\n\n") {
