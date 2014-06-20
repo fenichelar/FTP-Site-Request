@@ -1,8 +1,13 @@
 <?php
+
+require 'PHPMailerAutoload.php';
+
 $username = "";
 $date = "";
 $expiration = "";
 $mail_to = "";
+
+$mail = new PHPMailer();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$username = sanitizeText($_POST["username"]);
@@ -29,7 +34,7 @@ if($output!="The command completed successfully.\n\n") {
 	$body .= "Password: $password\r\n";
 	$body .= "Expiration: $expiration\r\n";
 } else {
-	echo "<pre>Success: Instructions have been sent to your email.</pre>";
+	echo "<pre>Success: The account was created.</pre>";
 	
 	$subject = "FTP Request Success";
 	$body = "An FTP site was successfully created.\r\n";
@@ -40,11 +45,21 @@ if($output!="The command completed successfully.\n\n") {
 	$body .= "Expiration: $expiration\r\n";
 }
 
-$mail_from = "ithelpdesk@mckenneys.com";
-$headers = "From: ".$mail_from."\r\n";
-$headers .= "Cc: ithelpdesk@mckenneys.com\r\n";
+$mail->IsSMTP();
+$mail->Host = "192.168.210.123";
+$mail->Port = 25;
+$mail->Subject = $subject;
+$mail->Body = $body;
+$mail->ContentType = 'text/plain';
+$mail->SetFrom("ithelpdesk@mckenneys.com", "IT Help Desk");
+$mail->AddCC("ithelpdesk@mckenneys.com", "IT Help Desk");
+$mail->AddAddress($mail_to);
 
-$mail_status = mail($mail_to, $subject, $body, $headers);
+if(!$mail->Send()) {
+	echo "<pre>Mailer Error: " .$mail->ErrorInfo."</pre>";
+} else {
+	echo "<pre>Instructions have been sent to your email.</pre>";
+}
 
 function sanitizeText($data) {
 	$data = trim($data);
