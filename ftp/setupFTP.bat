@@ -2,5 +2,5 @@
 net user %1 %2 /expire:%3 /add
 if NOT errorlevel 1 (
 	echo %1,%2,%3,%4>>C:\ftp\Users.csv
-	mkdir P:\%1
+	mkdir F:\FTP\LocalUser\%1
 )
