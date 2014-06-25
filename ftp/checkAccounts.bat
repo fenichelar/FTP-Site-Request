@@ -5,6 +5,6 @@ for /f "tokens=1,2,3,4 delims=," %%a in (C:\ftp\Users.csv) do (
 	set "expiration=%%c"
 	set "email=%%d"
 
-	adminCheckAccount.lnk %%a %%b %%c %%d
+	C:\ftp\adminCheckAccount.lnk %%a %%b %%c %%d
 	
 )
